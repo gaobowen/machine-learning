@@ -1,4 +1,5 @@
-# Torch-TensorRT
+# 机器学习 - Torch-TensorRT 推理加速
+
 Torch-TensorRT 作为 TorchScript 的扩展。 它优化并执行兼容的子图，让 PyTorch 执行剩余的图。 PyTorch 全面而灵活的功能集与 Torch-TensorRT 一起使用，解析模型并将优化应用于图的 TensorRT 兼容部分。
 ![](img3.webp)
 其中绿色部分是TensorRT支持的算子，白色的部分是不支持部分，则会在torch中兼容运算。  
