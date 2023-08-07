@@ -176,7 +176,7 @@ print(f'\nAnswer: {response["result"]}')
     if the context information isn't helpful, ignore the the context information.
 
     The answer always been translate into Chinese language.
-    answer the question in Chinese\n<</SYS>>[/INST][INST]
+    answer the question\n<</SYS>>[/INST][INST]
     """
     context_str = ''
 
@@ -196,6 +196,7 @@ print(f'\nAnswer: {response["result"]}')
 
     print('lastq ==>', lastq)
 
+    # 搜索知识库
     # myresults = vectordb.similarity_search(lastq, k=2)
     # print(myresults)
     # for i in range(len(myresults)):
