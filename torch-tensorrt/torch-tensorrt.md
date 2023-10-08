@@ -359,3 +359,6 @@ Average batch time: 60.45 ms
 
 由此可以得出结论，不对模型做其他改动，在使用 半精度 + torch_tensorrt 的情况下，有5倍多的提升。
 同样使用半精度，使用torch_tensorrt后相较于原模型也有1倍多的提升。
+
+参考文献：
+https://pytorch.org/TensorRT/_notebooks/dynamic-shapes.html
