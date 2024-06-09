@@ -129,6 +129,10 @@ class MultiHeadAttention(nn.Module):
 《Knowledge Neurons in Pretrained Transformers》  
 [聊一聊transformer里的FFN](https://zhuanlan.zhihu.com/p/685943779)  
 
+FFN 是一种混合专家模型？  
+MoEfication: Transformer Feed-forward Layers are Mixtures of Experts  
+这是刘知远团队的论文，其实一直以来，神经网络就存在稀疏激活的现象，也就是在推理的时候，其实只有极小一部分参数参与了计算。这篇论文则通过 MoE 的思想来将 FFN 层拆分成了多个专家，并且新增了一个路由模块来确定推理的时候来挂哪个专家的门诊：）这么做完之后，在提升推理速度的同时，效果依然能保持原来的95%以上。
+
 ```py
 class PositionwiseFeedForward(nn.Module):
     ''' A two-feed-forward-layer module '''
@@ -151,6 +155,8 @@ class PositionwiseFeedForward(nn.Module):
 
         return x
 ```
+
+
 
 #### 组装整一个Encoder层
 ```py
