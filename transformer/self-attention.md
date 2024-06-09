@@ -16,9 +16,9 @@ $a \cdot b =a^Tb =\sum_{i=1}^{n} a_i b_i =||a||\;||b||\;cos\theta$
 ![alt text](image.png)  
 Q K 的内积 表示了 Q中每个单词 与 K的每个单词 的关联度矩阵（注意力评分），softmax进行归一化处理使得整体的关联度之和为1
 
-`进行softmax之前需要对attention进行scaled（为什么要除以$\sqrt{d_k}$）?`
-https://blog.csdn.net/weixin_45610907/article/details/128175273  
-当d_k较大时，点积的幅度也就变大方差变大，容易进入softmax函数的梯度消失区域。
+进行softmax之前需要对attention进行scaled（为什么要除以$\sqrt{d_k}$）?  
+the dot products grow large in magnitude, pushing the softmax function into regions where it has extremely small gradients  
+当d_k较大时，点积的幅度也就变大，容易进入softmax函数的梯度消失区域。
 
 
 ```py
@@ -124,10 +124,10 @@ class MultiHeadAttention(nn.Module):
 #### PositionwiseFeedForward
 定位前馈网络
 虽然线性变换在不同位置上是相同的，但它们在不同层之间使用不同的参数。另一种描述方法是将其描述为两个核大小为1的卷积。（原文）
-后续的研究表明是Knowledge Neurons。tokens在前一层attention做global interaction之后，通过FFN的参数中存放着大量training过程中学习到的比较抽象的knowledge来进一步update。目前有些studies是说明这件事的，如 
-Transformer Feed-Forward Layers Are Key-Value Memories
-Knowledge Neurons in Pretrained Transformers
-![聊一聊transformer里的FFN](https://zhuanlan.zhihu.com/p/685943779)
+后续的研究表明是Knowledge Neurons。tokens在前一层attention做global interaction之后，通过FFN的参数中存放着大量training过程中学习到的比较抽象的knowledge来进一步update。目前有些studies是说明这件事的，如   
+《Transformer Feed-Forward Layers Are Key-Value Memories》  
+《Knowledge Neurons in Pretrained Transformers》  
+[聊一聊transformer里的FFN](https://zhuanlan.zhihu.com/p/685943779)  
 
 ```py
 class PositionwiseFeedForward(nn.Module):
@@ -194,11 +194,6 @@ class DecoderLayer(nn.Module):
         decoder_y = self.pos_ffn(decoder_y)
         return decoder_y, decoder_attn, dec_enc_attn
 ```
-
-
-
-轻松理解 Transformers (3): Feed-Forward Layer部分
-https://zhuanlan.zhihu.com/p/665269977?utm_id=0
 
 
 https://github.com/jadore801120/attention-is-all-you-need-pytorch
