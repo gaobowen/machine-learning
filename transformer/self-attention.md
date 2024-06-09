@@ -124,7 +124,7 @@ class MultiHeadAttention(nn.Module):
 #### PositionwiseFeedForward
 定位前馈网络
 虽然线性变换在不同位置上是相同的，但它们在不同层之间使用不同的参数。另一种描述方法是将其描述为两个核大小为1的卷积。（原文）
-常见的说法是Knowledge Neurons。tokens在前一层attention做global interaction之后，通过FFN的参数中存放着大量training过程中学习到的比较抽象的knowledge来进一步update。目前有些studies是说明这件事的，如 
+后续的研究表明是Knowledge Neurons。tokens在前一层attention做global interaction之后，通过FFN的参数中存放着大量training过程中学习到的比较抽象的knowledge来进一步update。目前有些studies是说明这件事的，如 
 Transformer Feed-Forward Layers Are Key-Value Memories
 Knowledge Neurons in Pretrained Transformers
 ![聊一聊transformer里的FFN](https://zhuanlan.zhihu.com/p/685943779)
