@@ -11,7 +11,7 @@ $a \cdot b =a^Tb =\sum_{i=1}^{n} a_i b_i =||a||\;||b||\;cos\theta$
 
 向量的内积，表征一个向量在另一个向量上的投影。投影的值大，说明两个向量相关度高。如果两个向量夹角是九十度，那么这两个向量线性无关。
 
-上述的$a$和$b$均为列向量，而公式里的$Q$$K$是行向量（batch * len * d_k ）所以点积写成 $QK^T$。
+上述的$a$和$b$均为列向量，而公式里的$Q$ $K$是行向量（batch * len * d_k ）所以点积写成 $QK^T$。
 
 ![alt text](image.png)  
 Q K 的内积 表示了 Q中每个单词 与 K的每个单词 的关联度矩阵（注意力评分），softmax进行归一化处理使得整体的关联度之和为1
@@ -122,7 +122,13 @@ class MultiHeadAttention(nn.Module):
 ![](transformer_resideual_layer_norm_2.png)
 
 #### PositionwiseFeedForward
-向量的位置对NLP的翻译有影响，需要学习向量的位置，学习的是包含位置信息的特征
+定位前馈网络
+虽然线性变换在不同位置上是相同的，但它们在不同层之间使用不同的参数。另一种描述方法是将其描述为两个核大小为1的卷积。（原文）
+常见的说法是Knowledge Neurons。tokens在前一层attention做global interaction之后，通过FFN的参数中存放着大量training过程中学习到的比较抽象的knowledge来进一步update。目前有些studies是说明这件事的，如 
+Transformer Feed-Forward Layers Are Key-Value Memories
+Knowledge Neurons in Pretrained Transformers
+![聊一聊transformer里的FFN](https://zhuanlan.zhihu.com/p/685943779)
+
 ```py
 class PositionwiseFeedForward(nn.Module):
     ''' A two-feed-forward-layer module '''
@@ -190,12 +196,9 @@ class DecoderLayer(nn.Module):
 ```
 
 
-edit
 
-
-
-
-
+轻松理解 Transformers (3): Feed-Forward Layer部分
+https://zhuanlan.zhihu.com/p/665269977?utm_id=0
 
 
 https://github.com/jadore801120/attention-is-all-you-need-pytorch
